@@ -4,8 +4,9 @@
 
 ## Descrição
 
-O NeoSystem é um sistema simples desenvolvido com o objetivo de gerenciar operações básicas de um negócio digital.  
-O projeto foi criado como atividade acadêmica, aplicando conceitos de desenvolvimento web, organização de código e versionamento.
+O NeoSystem é uma aplicação web para organização acadêmica que permite gerenciar tarefas,
+acompanhar desempenho e gerar relatórios,
+ajudando estudantes a planejarem melhor sua rotina de estudos.
 
 ---
 
