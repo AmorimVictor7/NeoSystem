@@ -22,48 +22,41 @@ Desenvolver uma aplicação funcional que permita:
 
 ## Funcionalidades
 
-- Cadastro de informações  
-- Listagem de dados  
-- Interface simples e intuitiva  
+- Cadastro de tarefas, provas e trabalhos
+- Listagem e filtragem de itens por tipo
+- Marcar itens como concluídos
+- Exclusão de itens
+- Dashboard com contadores e itens recentes
+- Alerta de entregas para o dia seguinte
+- Relatórios com atividades pendentes
+- Gráfico de atividades da semana
+- Gráfico de distribuição por tipo
+- Calendário com visualização de itens por data
+- Interface responsiva para mobile e desktop
 
 ---
 
 ## Tecnologias Utilizadas
 
-- GitHub  
-- Next.js  
-- FastAPI  
-- SQLite  
+GitHub
+HTML5
+CSS3
+JavaScript
+Bootstrap 5
+Chart.js
 
 ---
 
 ## Estrutura do Projeto
 
-
 /neosystem
-  /frontend
-    /src
-      /components
-      /pages
-      /services
-      /styles
-      /utils
-    /public
-    package.json
-
-  /backend
-    /app
-      /routes
-      /models
-      /schemas
-      /services
-      /database
-    main.py
-    requirements.txt
+  index.html
+  script.js
+  style.css
    
 --- 
 
-##Metodologia de Desenvolvimento
+## Metodologia de Desenvolvimento
 
 O desenvolvimento do projeto NeoSystem segue uma abordagem ágil baseada em Kanban, permitindo uma organização simples e eficiente das tarefas. 
 Organização das tarefas As atividades são divididas em: 
@@ -75,8 +68,6 @@ Definição do escopo do projeto
 Desenvolvimento incremental das funcionalidades 
 Testes básicos após cada implementação 
 Ajustes e melhorias contínuas 
-
----
 
 --- 
 ## Integrantes 
