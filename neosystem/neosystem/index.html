@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoSystem</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <i class="bi bi-layers-fill"></i>
+                <span class="sidebar-brand">NeoSystem</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle" title="Recolher menu">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+
+        <ul class="sidebar-nav">
+            <li>
+                <a href="#" class="sidebar-link active" data-page="dashboard">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>Início</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-link" data-page="add">
+                    <i class="bi bi-plus-circle"></i>
+                    <span>Adicionar</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-link" data-page="reports">
+                    <i class="bi bi-bar-chart-line"></i>
+                    <span>Relatórios</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-link" data-page="calendar">
+                    <i class="bi bi-calendar3"></i>
+                    <span>Calendário</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <span>Sistema NeoSystem</span>
+        </div>
+    </nav>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="main-content" id="mainContent">
+
+        <div class="topbar">
+            <button class="topbar-toggle" id="mobileSidebarToggle" title="Abrir menu">
+                <i class="bi bi-list"></i>
+            </button>
+            <span class="topbar-title" id="pageTitle">Dashboard</span>
+            <div class="topbar-user">
+                <i class="bi bi-person-circle"></i>
+            </div>
+        </div>
+
+        <div class="page-content">
+
+            <div class="page active" id="page-dashboard">
+                <div class="page-header">
+                    <h2>Bem-vindo ao NeoSystem</h2>
+                    <p class="text-muted">Gerencie suas tarefas, provas e trabalhos em um só lugar.</p>
+                </div>
+
+                <div id="tomorrowAlert" class="mb-4"></div>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-sm-6 col-xl-4">
+                        <div class="stat-card stat-card--tarefa">
+                            <div class="stat-card__icon">
+                                <i class="bi bi-check2-square"></i>
+                            </div>
+                            <div class="stat-card__info">
+                                <span class="stat-card__label">Tarefas</span>
+                                <span class="stat-card__value" id="countTarefas">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-4">
+                        <div class="stat-card stat-card--prova">
+                            <div class="stat-card__icon">
+                                <i class="bi bi-journal-text"></i>
+                            </div>
+                            <div class="stat-card__info">
+                                <span class="stat-card__label">Provas</span>
+                                <span class="stat-card__value" id="countProvas">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-4">
+                        <div class="stat-card stat-card--trabalho">
+                            <div class="stat-card__icon">
+                                <i class="bi bi-folder2-open"></i>
+                            </div>
+                            <div class="stat-card__info">
+                                <span class="stat-card__label">Trabalhos</span>
+                                <span class="stat-card__value" id="countTrabalhos">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-clock-history me-2"></i>Itens Recentes</span>
+                        <a href="#" class="btn btn-sm btn-outline-primary" data-page="add">
+                            <i class="bi bi-plus-lg me-1"></i>Adicionar
+                        </a>
+                    </div>
+                    <div class="card-body p-0" id="recentItems"></div>
+                </div>
+
+                <div class="row g-3 mt-1">
+                    <div class="col-6">
+                        <div class="week-stat week-stat--done">
+                            <div class="week-stat__value" id="weekDoneCount">0</div>
+                            <div class="week-stat__label">
+                                <i class="bi bi-check-circle-fill me-1"></i>Concluídas esta semana
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="week-stat week-stat--pending">
+                            <div class="week-stat__value" id="totalPendingCount">0</div>
+                            <div class="week-stat__label">
+                                <i class="bi bi-hourglass-split me-1"></i>Pendentes no total
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" id="page-add">
+                <div class="page-header">
+                    <h2>Adicionar Item</h2>
+                    <p class="text-muted">Registre uma nova tarefa, prova ou trabalho.</p>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-7">
+                        <div class="card">
+                            <div class="card-body p-4">
+                                <form id="addItemForm" novalidate>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold" for="fieldMateria">
+                                            <i class="bi bi-book me-1"></i>Matéria
+                                        </label>
+                                        <input type="text" class="form-control" id="fieldMateria"
+                                            placeholder="Insira aqui a matéria" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold" for="fieldTipo">
+                                            <i class="bi bi-tag me-1"></i>Tipo
+                                        </label>
+                                        <select class="form-select" id="fieldTipo" required>
+                                            <option value="" disabled selected>Selecione o tipo</option>
+                                            <option value="Tarefa">Tarefa</option>
+                                            <option value="Prova">Prova</option>
+                                            <option value="Trabalho">Trabalho</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold" for="fieldData">
+                                            <i class="bi bi-calendar3 me-1"></i>Data de Entrega
+                                        </label>
+                                        <input type="date" class="form-control" id="fieldData" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label fw-semibold" for="fieldDescricao">
+                                            <i class="bi bi-text-left me-1"></i>Descrição
+                                        </label>
+                                        <textarea class="form-control" id="fieldDescricao" rows="3"
+                                            placeholder="Detalhes sobre o item"></textarea>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary btn-lg">
+                                            <i class="bi bi-plus-lg me-2"></i>Salvar Item
+                                        </button>
+                                    </div>
+                                </form>
+
+                                <div class="alert alert-success mt-3 d-none" id="successAlert" role="alert">
+                                    <i class="bi bi-check-circle-fill me-2"></i>Item salvo com sucesso!
+                                </div>
+                                <div class="alert alert-danger mt-3 d-none" id="errorAlert" role="alert">
+                                    <i class="bi bi-exclamation-circle-fill me-2"></i>Preencha todos os campos
+                                    obrigatórios.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" id="page-reports">
+                <div class="page-header">
+                    <h2>Relatórios</h2>
+                    <p class="text-muted">Visualize e gerencie todos os itens registrados.</p>
+                </div>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-7">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <i class="bi bi-bar-chart-fill me-2"></i>Atividades por Dia
+                            </div>
+                            <div class="card-body"
+                                style="position:relative; height:220px; overflow-x:auto; overflow-y:hidden;">
+                                <canvas id="weeklyChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <i class="bi bi-pie-chart-fill me-2"></i>Distribuição por Tipo
+                            </div>
+                            <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                <canvas id="typeChart" style="max-height:190px;max-width:190px"></canvas>
+                                <div id="typeChartLegend" class="type-chart-legend"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="concluded-header" onclick="togglePending()" style="margin-bottom:0;">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-hourglass-split"></i>
+                        <span>Atividades Pendentes</span>
+                        <span class="badge bg-danger rounded-pill" id="pendingCount">0</span>
+                    </div>
+                    <i class="bi bi-chevron-down concluded-chevron" id="pendingChevron"
+                        style="transform:rotate(180deg)"></i>
+                </div>
+                <div id="pendingSection" class="concluded-section open mb-4">
+                    <div id="pendingList"></div>
+                </div>
+
+                <div class="concluded-header" onclick="toggleConcluded()">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-check-circle"></i>
+                        <span>Atividades Concluídas</span>
+                        <span class="badge bg-primary rounded-pill" id="reportCount">0</span>
+                    </div>
+                    <i class="bi bi-chevron-down concluded-chevron" id="concludedChevron"></i>
+                </div>
+
+                <div id="concludedSection" class="concluded-section">
+                    <div class="concluded-filters">
+                        <button class="btn-filter active" data-filter="Todos">
+                            <i class="bi bi-grid-3x3-gap me-1"></i>Todos
+                        </button>
+                        <button class="btn-filter" data-filter="Tarefa">
+                            <i class="bi bi-check2-square me-1"></i>Tarefas
+                        </button>
+                        <button class="btn-filter" data-filter="Prova">
+                            <i class="bi bi-journal-text me-1"></i>Provas
+                        </button>
+                        <button class="btn-filter" data-filter="Trabalho"> 
+                         
+                            <i class="bi bi-folder2-open me-1"></i>Trabalhos
+                        </button>
+                        <button class="btn-clear-all ms-auto" onclick="clearAll()" title="Limpar concluídas">
+                            <i class="bi bi-trash3"></i>
+                        </button>
+                    </div>
+                    <div id="clearAllConfirm"></div>
+                    <div id="reportsList"></div>
+                </div>
+            </div>
+
+            <div class="page" id="page-calendar">
+                <div class="page-header">
+                    <h2>Calendário</h2>
+                    <p class="text-muted">Visualize seus itens por data.</p>
+                </div>
+
+                <div class="card mb-4">
+
+                    <div class="card-header d-flex align-items-center justify-content-between gap-2">
+                        <button class="cal-nav-btn" id="calPrev" title="Mês anterior">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="cal-month-title" id="calMonthYear"></span>
+                            <button class="cal-today-btn" id="calToday">Hoje</button>
+                        </div>
+                        <button class="cal-nav-btn" id="calNext" title="Próximo mês">
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <div class="cal-weekdays">
+                        <span>Dom</span><span>Seg</span><span>Ter</span>
+                        <span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
+                    </div>
+
+                    <div class="cal-grid" id="calGrid"></div>
+                </div>
+
+                <div class="cal-legend">
+                    <span class="cal-legend__item">
+                        <span class="cal-dot cal-dot--Tarefa"></span> Tarefa
+                    </span>
+                    <span class="cal-legend__item">
+                        <span class="cal-dot cal-dot--Prova"></span> Prova
+                    </span>
+                    <span class="cal-legend__item">
+                        <span class="cal-dot cal-dot--Trabalho"></span> Trabalho
+                    </span>
+                </div>
+
+                <div id="calDayPanel"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
