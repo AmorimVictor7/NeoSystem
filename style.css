@@ -82,6 +82,13 @@ body {
     flex-shrink: 0;
 }
 
+.sidebar-logo-img {
+    height: 44px;
+    width: auto;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
 .sidebar-brand {
     transition: opacity .2s, width .28s;
     opacity: 1;
@@ -1555,4 +1562,171 @@ textarea.form-control {
     text-transform: uppercase;
     letter-spacing: .5px;
     line-height: 1.4;
+}
+
+/* ==============================
+   DARK MODE TOGGLE BUTTON
+   ============================== */
+
+.topbar-darkmode {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    cursor: pointer;
+    padding: 7px 9px;
+    border-radius: 8px;
+    transition: var(--transition);
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.topbar-darkmode:hover {
+    background: var(--color-bg);
+    color: var(--color-primary);
+}
+
+/* ==============================
+   DARK MODE THEME
+   ============================== */
+
+[data-theme="dark"] {
+    --color-bg: #0f172a;
+    --color-white: #1e293b;
+    --color-text: #e2e8f0;
+    --color-muted: #94a3b8;
+    --color-border: #334155;
+    --color-primary-light: rgba(37, 99, 235, 0.2);
+    --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.3);
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 18px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .topbar {
+    background: var(--color-white);
+}
+
+[data-theme="dark"] .card {
+    background: var(--color-white);
+}
+
+[data-theme="dark"] .card-header {
+    background: var(--color-white) !important;
+    color: var(--color-text) !important;
+    --bs-card-cap-color: var(--color-text);
+}
+
+[data-theme="dark"] .card-body {
+    background: var(--color-white);
+}
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select {
+    background-color: #0f172a;
+    color: var(--color-text);
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] .form-select:focus {
+    background-color: #1e293b;
+    color: var(--color-text);
+}
+
+[data-theme="dark"] .form-control::placeholder {
+    color: #64748b;
+}
+
+[data-theme="dark"] select.form-select option {
+    background-color: #1e293b;
+    color: var(--color-text);
+}
+
+[data-theme="dark"] .cal-weekdays {
+    background: #0f172a;
+}
+
+[data-theme="dark"] .cal-cell--clickable:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .pending-row {
+    border-bottom-color: var(--color-border);
+}
+
+[data-theme="dark"] .pending-row:hover,
+[data-theme="dark"] .recent-row:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .recent-row {
+    border-bottom-color: var(--color-border);
+}
+
+[data-theme="dark"] .concluded-header:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .cal-day-panel__header {
+    background: #0f172a;
+}
+
+[data-theme="dark"] .pending-edit-form {
+    background: #0f172a;
+}
+
+[data-theme="dark"] .btn-filter {
+    background: var(--color-white);
+    color: var(--color-muted);
+}
+
+[data-theme="dark"] .btn-expand,
+[data-theme="dark"] .btn-delete,
+[data-theme="dark"] .btn-done {
+    color: #475569;
+}
+
+[data-theme="dark"] .toast-msg {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+[data-theme="dark"] .week-stat--done {
+    background: rgba(41, 128, 185, 0.12);
+    border-color: rgba(41, 128, 185, 0.35);
+}
+
+[data-theme="dark"] .week-stat--pending {
+    background: rgba(225, 29, 72, 0.1);
+    border-color: rgba(225, 29, 72, 0.3);
+}
+
+/* Bootstrap overrides */
+[data-theme="dark"] .text-muted {
+    color: var(--color-muted) !important;
+}
+
+[data-theme="dark"] .text-success {
+    color: #4ade80 !important;
+}
+
+[data-theme="dark"] .text-danger {
+    color: #f87171 !important;
+}
+
+[data-theme="dark"] .alert-success {
+    background-color: rgba(74, 222, 128, 0.1);
+    border-color: rgba(74, 222, 128, 0.3);
+    color: #86efac;
+}
+
+[data-theme="dark"] .alert-danger {
+    background-color: rgba(248, 113, 113, 0.1);
+    border-color: rgba(248, 113, 113, 0.3);
+    color: #fca5a5;
+}
+
+[data-theme="dark"] .alert-success .bi,
+[data-theme="dark"] .alert-danger .bi {
+    color: inherit;
 }

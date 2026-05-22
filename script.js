@@ -215,7 +215,17 @@ function renderReports(filter) {
     renderCharts(items);
 }
 
+function getChartTheme() {
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    return {
+        tickColor: dark ? '#94a3b8' : '#718096',
+        gridColor: dark ? 'rgba(255,255,255,.07)' : 'rgba(0,0,0,.05)',
+        legendColor: dark ? '#94a3b8' : '#718096'
+    };
+}
+
 function renderCharts(items) {
+    const theme = getChartTheme();
 
     const dayMap = {};
     items.forEach(item => {
@@ -263,7 +273,10 @@ function renderCharts(items) {
             maintainAspectRatio: false,
             interaction: { mode: 'index', intersect: false },
             plugins: {
-                legend: { position: 'top', labels: { boxWidth: 12, font: { size: 12 } } },
+                legend: {
+                    position: 'top',
+                    labels: { boxWidth: 12, font: { size: 12 }, color: theme.legendColor }
+                },
                 tooltip: {
                     callbacks: {
                         title: (ctx) => {
@@ -276,13 +289,13 @@ function renderCharts(items) {
             },
             scales: {
                 x: {
-                    ticks: { font: { size: 11 }, maxRotation: 45, minRotation: 0 },
+                    ticks: { font: { size: 11 }, maxRotation: 45, minRotation: 0, color: theme.tickColor },
                     grid: { display: false }
                 },
                 y: {
                     beginAtZero: true,
-                    ticks: { stepSize: 1, font: { size: 11 } },
-                    grid: { color: 'rgba(0,0,0,.05)' }
+                    ticks: { stepSize: 1, font: { size: 11 }, color: theme.tickColor },
+                    grid: { color: theme.gridColor }
                 }
             }
         }
@@ -710,3 +723,23 @@ document.getElementById('sidebarOverlay').addEventListener('click', () => {
 });
 
 renderDashboard();
+
+// Dark mode
+function setTheme(dark) {
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    const icon = document.getElementById('darkmodeIcon');
+    if (icon) icon.className = dark ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+    localStorage.setItem('neosystem_theme', dark ? 'dark' : 'light');
+    const active = document.querySelector('.page.active');
+    if (active?.id === 'page-reports') renderReports();
+}
+
+(function () {
+    const saved = localStorage.getItem('neosystem_theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setTheme(saved ? saved === 'dark' : prefersDark);
+})();
+
+document.getElementById('darkmodeToggle').addEventListener('click', () => {
+    setTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
+});
